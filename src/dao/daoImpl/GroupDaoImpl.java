@@ -12,7 +12,7 @@ public class GroupDaoImpl implements GroupDao {
 
     Database database = new Database();
 
-    @Override
+     @Override
     public String addGroup(Group group) {
         for (Group existingGroup : Database.groups) {
             if (existingGroup.getId().equals(group.getId())) {
@@ -22,6 +22,7 @@ public class GroupDaoImpl implements GroupDao {
         Database.groups.add(group);
         return group.getId() + "  чи ID деги " + group.getGroupName() + " аттуу группа ийгиликтуу сакталды.";
     }
+
 
 
     @Override
@@ -48,26 +49,25 @@ public Group updateGroupName(String groupName, String newName) {
 
 }
 
+
+
     @Override
 public Set<Group> getAllGroups() {
-    return new HashSet<>(Database.groups);
+    return new HashSet<>(Database.groups) ;
 }
-
 
 
 
     @Override
-public String deleteGroup(String groupName) {
-    for (Group group : new HashSet<>(Database.groups)) {
-        if (groupName.equalsIgnoreCase(group.getGroupName())) {
-            Database.groups.remove(group);
-            return "Group with name '" + groupName + "' deleted.";
+    public String deleteGroup(String groupName) {
+        for (Group group : new HashSet<>(Database.groups)) {
+            if (groupName.equalsIgnoreCase(group.getGroupName())) {
+                Database.groups.remove(group);
+                return "Group with name '" + groupName + "' deleted.";
+            }
         }
+        throw new IllegalStateException("Мындай группа табылган жок ");
     }
-    throw new IllegalStateException("Мындай группа табылган жок ");
-}
-
-
 
 
 }

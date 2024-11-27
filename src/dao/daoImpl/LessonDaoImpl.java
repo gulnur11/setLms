@@ -35,10 +35,6 @@ public class LessonDaoImpl implements LessonDao {
     @Override
 public Lesson getLessonByName(String lessonName) {
     try {
-        if (lessonName == null || lessonName.trim().isEmpty()) {
-            System.out.println("Error: Сабактын аты бош болбошу керек. ");
-            return null;
-        }
         for (Group group : Database.groups) {
             if (group.getLessons() != null) {
                 for (Lesson lesson : group.getLessons()) {
@@ -60,33 +56,27 @@ public Lesson getLessonByName(String lessonName) {
 
 
     @Override
-    public Set<Lesson> getAllLessonByGroupName(String name) {
-        try {
-            if (name == null || name.trim().isEmpty()) {
-                throw new IllegalArgumentException("Группанын аты бош боло албайт.");
-            }
-            for (Group group : Database.groups) {
-                if (group.getGroupName().equalsIgnoreCase(name)) {
-                    return group.getLessons() != null ? group.getLessons() : Set.of();
+public Set<Lesson> getAllLessonByGroupName(String name) {
+    try {
+        for (Group group : Database.groups) {
+            if (group.getGroupName().equalsIgnoreCase(name)) {
+                return group.getLessons();
                 }
-            }
-            throw new IllegalArgumentException("Мындай " + name + " аттуу группа табылган жок.");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-            return Set.of();
-        } catch (Exception e) {
-            System.out.println("Кутуусуз ката: " + e.getMessage());
-            return Set.of();
         }
+        throw new IllegalArgumentException("Мындай " + name + " аттуу группа табыдган жок.");
+    } catch (IllegalArgumentException e) {
+        System.out.println("Ката : " + e.getMessage());
+
+        return Set.of();
     }
+}
+
+
 
 
     @Override
     public String deleteLesson(String lessonName) {
         try {
-            if (lessonName == null || lessonName.trim().isEmpty()) {
-                throw new IllegalArgumentException("Сабактын аты бош боло албайт.");
-            }
             for (Group group : Database.groups) {
                 Set<Lesson> lessons = group.getLessons();
                 if (lessons != null) {

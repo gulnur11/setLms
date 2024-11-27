@@ -95,20 +95,20 @@ public Student findByFirstName(String name) {
     }
 }
 
+
+
     @Override
-public Set<Student> getAllStudentsByGroupName(String groupName) {
-    try {
+    public Set<Student> getAllStudentsByGroupName(String groupName) {
         for (Group group : Database.groups) {
             if (group.getGroupName().equalsIgnoreCase(groupName)) {
-                return group.getStudents() != null ? group.getStudents() : new HashSet<>();
+                if (group.getStudents() != null) {
+                    return group.getStudents();
+                }
+                return new HashSet<>();
             }
         }
         throw new IllegalArgumentException("Мындай " + groupName + " аттуу группа табылган жок.");
-    } catch (IllegalArgumentException e) {
-        System.out.println("Error: " + e.getMessage());
-        return new HashSet<>();
     }
-}
 
 
 

@@ -25,6 +25,7 @@ public class Main {
     public static void main(String[] args) {
 
         LocalTime currentTime = LocalTime.now();
+
         int hour = currentTime.getHour();
         String greetings;
 
@@ -42,7 +43,6 @@ public class Main {
         System.out.println("Саат: " + currentTime.getHour() + ":" + currentTime.getMinute());
 
 
-
        while (true) {
            System.out.println("Катталган болсонуз 1 басыныз, пароль унутуп калып, озгортуу учун 2 басыныз!");
            Scanner scanner = new Scanner(System.in);
@@ -50,7 +50,6 @@ public class Main {
 
            if (number == 1) {
                System.out.println("Кируу учун электрондук почтанызды жана паролунузду жазыныз!");
-
 
                String registeredEmail = "admin@gmail.com";
                String registeredPassword = "admin";
@@ -61,6 +60,7 @@ public class Main {
 
                System.out.print("Пароль жазыныз: ");
                String password = scanner.nextLine();
+
                if (email.equals(registeredEmail)) {
                    if (password.equals(registeredPassword)) {
                        System.out.println("Welcome ! ");
